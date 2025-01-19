@@ -1,5 +1,6 @@
+/*
 import React from 'react';
-import defaultPoster from '../assets/default.png'; // Adjust the path as needed
+import defaultPoster from '../assets/garfield.jpg'; // Adjust the path as needed
 
 function MovieList({ movies }) {
   return (
@@ -24,6 +25,61 @@ function MovieList({ movies }) {
         ) : (
           <p className="text-center">No movies found.</p>
         )}
+      </div>
+    </div>
+  );
+}
+
+export default MovieList;*/
+import React from 'react';
+import MovieCard from './MovieCard';
+import defaultPoster from '../assets/garfield.jpg'; // Adjust the path as needed
+
+function MovieList({ movies }) {
+  const movieList = movies.filter(movie => movie.Type === 'movie');
+  const tvShowList = movies.filter(movie => movie.Type === 'tvshow');
+
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-md-6">
+          <h2>Movies</h2>
+          <div className="row">
+            {movieList.length > 0 ? (
+              movieList.map((movie) => (
+                <div key={movie.imdbID} className="col-md-6">
+                  <MovieCard
+                    id={movie.imdbID}
+                    title={movie.Title}
+                    year={movie.Year}
+                    poster={movie.Poster !== "N/A" ? movie.Poster : defaultPoster}
+                  />
+                </div>
+              ))
+            ) : (
+              <p className="text-center">No movies found.</p>
+            )}
+          </div>
+        </div>
+        <div className="col-md-6">
+          <h2>TV Shows</h2>
+          <div className="row">
+            {tvShowList.length > 0 ? (
+              tvShowList.map((tvshow) => (
+                <div key={tvshow.imdbID} className="col-md-6">
+                  <MovieCard
+                    id={tvshow.imdbID}
+                    title={tvshow.Title}
+                    year={tvshow.Year}
+                    poster={tvshow.Poster !== "N/A" ? tvshow.Poster : defaultPoster}
+                  />
+                </div>
+              ))
+            ) : (
+              <p className="text-center">No TV shows found.</p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+/*
 body {
   font-family: Arial, sans-serif;
   background-color: white;
@@ -79,4 +80,212 @@ h2 {
 
 .search-bar button:hover {
   background-color: #0056b3;
+}*/
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.title{
+  background-color: rgb(62, 131, 187);
+  padding: 20px;
+  font-size: 50px;
+  font-weight: inherit;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.header-buttons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+h2 {
+  text-align: center;
+  font-style: normal;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.card {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.card img {
+  display: block;
+  margin: 10px auto;
+  border-radius: 5px;
+  width: 150px;
+  height: 220px;
+  max-width: 150px;
+}
+
+.card h3 {
+  margin: 10px 0;
+  color: #333;
+}
+
+.card p {
+  color: black;
+}
+
+.search-bar {
+  background-color: darkblue;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar input {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #0056b3;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+}
+
+.login-container form div {
+  margin-bottom: 15px;
+}
+
+.login-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.login-container button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background-color: #0056b3;
+}
+
+.btn-light-blue {
+  background-color: #add8e6;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-light-blue:hover {
+  background-color: #87ceeb;
+}
+
+.movie-details {
+  text-align: center;
+  padding: 20px;
+}
+
+.movie-details img.movie-poster {
+  width: 300px;
+  height: 450px;
+  border-radius: 10px;
+}
+
+.movie-details h2 {
+  margin-top: 20px;
+}
+
+.movie-details p {
+  margin: 10px 0;
+}
+
+.movie-details button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.movie-details button:hover {
+  background-color: #0056b3;
+}
+
+.btn-more-details {
+  background-color: rgb(62, 131, 187);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-more-details:hover {
+  background-color: #0056b3;
+}
+
+.about-us {
+  text-align: center;
+  padding: 20px;
+  /*background-image: url('./assets/popcorn bg.jpg'); /* Adjust the path as needed */
+  background-size: cover;
+  background-position: center;
+}
+
+.about-us h2 {
+  margin-top: 20px;
+}
+
+.about-us p {
+  margin: 10px 0;
+  font-size: 18px;
 }
