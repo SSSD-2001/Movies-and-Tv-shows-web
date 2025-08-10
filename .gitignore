@@ -101,7 +101,10 @@ backend-workspace/src/api/services/
 backend-workspace/src/config/
 backend-workspace/src/models/
 backend-workspace/src/utils/
-project1/
+# Specific problematic files in project1 (not the entire directory)
+project1/public/logo192.png
+project1/public/logo512.png
+project1/public/favicon.ico
 **/logo192.png
 **/logo512.png
 **/*.ico
