@@ -50,6 +50,42 @@ jspm_packages/
 .DS_Store
 Thumbs.db
 
+# Visual Studio / C# specific
+bin/
+obj/
+*.user
+*.suo
+*.sln.docstates
+*.cache
+*.log
+*.tmp
+*.temp
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]uild/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# Build Results of an ATL Project
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
 # Package lock files (optional - uncomment if you don't want to track them)
 # package-lock.json
 # yarn.lock
