@@ -1,0 +1,569 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.title{
+  background-color: rgb(92, 167, 228);
+  padding: 20px;
+  font-size: 50px;
+  font-weight: inherit;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.header-buttons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+h2 {
+  text-align: center;
+  font-style: normal;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.card {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.card img {
+  display: block;
+  margin: 10px auto;
+  border-radius: 5px;
+  width: 150px;
+  height: 220px;
+  max-width: 150px;
+}
+
+.card h3 {
+  margin: 10px 0;
+  color: #333;
+}
+
+.card p {
+  color: black;
+}
+
+.search-bar {
+  background-color: darkblue;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar input {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #0071eb;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.search-bar button:hover {
+  background-color: #0056b3;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+}
+
+.login-container form div {
+  margin-bottom: 15px;
+}
+
+.login-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.login-container button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #0071eb;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #0056b3;
+}
+
+.btn-light-blue {
+  background-color: #add8e6;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-light-blue:hover {
+  background-color: #87ceeb;
+}
+
+.movie-details {
+  text-align: center;
+  padding: 20px;
+}
+
+.movie-details img.movie-poster {
+  width: 300px;
+  height: 450px;
+  border-radius: 10px;
+}
+
+.movie-details h2 {
+  margin-top: 20px;
+}
+
+.movie-details p {
+  margin: 10px 0;
+}
+
+.movie-details button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.movie-details button:hover {
+  background-color: #0056b3;
+}
+
+.btn-more-details {
+  background-color: #0071eb;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-more-details:hover {
+  background-color: #0056b3;
+}
+
+.about-us {
+  text-align: center;
+  padding: 20px;
+  /*background-image: url('./assets/popcorn bg.jpg'); /* Adjust the path as needed */
+  background-size: cover;
+  background-position: center;
+}
+
+.about-us h2 {
+  margin-top: 20px;
+}
+
+.about-us p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+/* Home Page Styles */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 20px;
+  text-align: center;
+  background-image: url('./assets/HomeBG.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.home-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.welcome-message, .navigation-buttons {
+  position: relative;
+  z-index: 2;
+}
+
+.welcome-message {
+  margin-bottom: 40px;
+}
+
+.welcome-message h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.welcome-message p {
+  font-size: 1.2rem;
+  color: #f0f0f0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin-bottom: 30px;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.nav-button {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  background-color: #0071eb;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 5px;
+}
+
+.nav-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background-color: #0056b3;
+}
+
+.nav-button:active {
+  transform: translateY(0);
+}
+
+.movies-button {
+  background-color: #0071eb;
+  color: white;
+}
+
+.tvshows-button {
+  background-color: #0071eb;
+  color: white;
+}
+
+.nav-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.nav-button:active {
+  transform: translateY(0);
+}
+
+/* Section title for Movies/TV Shows pages */
+.section-title {
+  font-size: 2rem;
+  margin: 20px 0;
+  color: darkblue;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Movie grid layout */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  justify-items: center;
+}
+
+.movie-card-container {
+  display: flex;
+  justify-content: center;
+}
+
+.more-details-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* MovieDetails styles */
+.movie-description {
+  max-width: 600px;
+  margin: 20px auto;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  color: #333;
+  text-align: center; /* Add this line to center the text */
+  padding: 0 15px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.favorite-btn {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.cart-btn {
+  background-color: #dc3545;
+}
+
+.favorite-btn:hover {
+  background-color: #e0a800;
+}
+
+.cart-btn:hover {
+  background-color: #c82333;
+}
+
+/* Cart Icon styles */
+.cart-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-left: 15px;
+  text-decoration: none;
+  padding: 8px;
+  background-color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-icon .icon {
+  font-size: 1.5rem;
+}
+
+.cart-icon .badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #dc3545;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* Cart styles */
+.cart-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 40px;
+}
+
+.cart-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.cart-items {
+  flex: 1;
+  min-width: 300px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+}
+
+.cart-item-image {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-details h4 {
+  margin-bottom: 5px;
+}
+
+.remove-btn {
+  background-color: #dc3545;
+  padding: 8px 15px;
+}
+
+.remove-btn:hover {
+  background-color: #c82333;
+}
+
+.cart-summary {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
+  align-self: flex-start;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.total {
+  font-weight: bold;
+  font-size: 1.1em;
+  border-top: 1px solid #dee2e6;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.checkout-btn {
+  background-color: #28a745;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.checkout-btn:hover {
+  background-color: #218838;
+}
+
+
+/* Fixed size for movie posters */
+.movie-poster-image {
+  width: 250px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.movie-poster-image:hover {
+  transform: scale(1.03);
+}
+
+/* Movie card styling */
+.movie-card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  width: 280px;
+  margin: 0 auto;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-poster {
+  margin-bottom: 15px;
+}
+
+.card-content h3 {
+  margin: 10px 0 5px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.card-content .year {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+/* View Details button styling */
+.details-btn {
+  background-color: #0071eb;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.details-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.details-btn:active {
+  transform: translateY(0);
+}
