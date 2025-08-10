@@ -96,6 +96,8 @@ WPF app/
 backend-workspace/package-lock.json
 backend-workspace/src/api/controllers/
 backend-workspace/src/api/middleware/
+backend-workspace/src/config/
+backend-workspace/src/models/
 project1/
 **/logo192.png
 **/logo512.png
