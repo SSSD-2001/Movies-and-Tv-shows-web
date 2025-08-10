@@ -89,10 +89,17 @@ dlldata.c
 # WPF Application (separate desktop app)
 WPF app/
 
-# OneDrive sync issues (temporary)
+# OneDrive sync issues (temporary - until sync completes)
 **/~$*
 **/*.tmp
 **/.~lock.*
+backend-workspace/package-lock.json
+backend-workspace/src/api/controllers/
+backend-workspace/src/api/middleware/
+project1/
+**/logo192.png
+**/logo512.png
+**/*.ico
 
 # Package lock files (optional - uncomment if you don't want to track them)
 # package-lock.json
