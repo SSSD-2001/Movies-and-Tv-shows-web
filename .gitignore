@@ -86,6 +86,9 @@ nunit-*.xml
 [Rr]eleasePS/
 dlldata.c
 
+# WPF Application (separate desktop app)
+WPF app/
+
 # Package lock files (optional - uncomment if you don't want to track them)
 # package-lock.json
 # yarn.lock
