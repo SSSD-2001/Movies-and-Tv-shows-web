@@ -5,6 +5,7 @@ A full-stack web application for browsing movies and TV shows, built with React 
 ## 🎬 Overview
 
 This project consists of:
+
 - **React Frontend** (`project1/`) - Modern, responsive web interface
 - **Node.js Backend** (`server/`) - RESTful API with MongoDB integration
 - **TypeScript Backend** (`backend-workspace/`) - Alternative TypeScript implementation
@@ -12,12 +13,14 @@ This project consists of:
 ## 🚀 Quick Start
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/SSSD-2001/Movies-and-Tv-shows-web.git
    cd Movies-and-Tv-shows-web
    ```
 
 2. **Start the backend**
+
    ```bash
    cd server
    npm install
@@ -25,6 +28,7 @@ This project consists of:
    ```
 
 3. **Start the frontend**
+
    ```bash
    cd ../project1
    npm install

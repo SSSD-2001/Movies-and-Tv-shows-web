@@ -46,12 +46,14 @@ Movies-and-Tv-shows-web/
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/SSSD-2001/Movies-and-Tv-shows-web.git
    cd Movies-and-Tv-shows-web
    ```
 
 2. Install frontend dependencies:
+
    ```bash
    cd project1
    npm install
@@ -66,6 +68,7 @@ Movies-and-Tv-shows-web/
 ### Running the Application
 
 1. Start the backend server:
+
    ```bash
    cd server
    node database-server.js
@@ -74,6 +77,7 @@ Movies-and-Tv-shows-web/
    ```
 
 2. Start the React frontend:
+
    ```bash
    cd project1
    npm start
@@ -84,11 +88,13 @@ Movies-and-Tv-shows-web/
 ## Available Scripts
 
 ### Frontend (project1/)
+
 - `npm start` - Runs the app in development mode
 - `npm test` - Launches the test runner
 - `npm run build` - Builds the app for production
 
 ### Backend (server/)
+
 - `node database-server.js` - Starts MongoDB-connected server
 - `node simple-server.js` - Starts development server with mock data
 
