@@ -43,7 +43,10 @@ function Cart({ token }) {
   };
 
   const getTotalPrice = () => {
-    return cart.items.reduce((total, item) => total + item.price, 0).toFixed(2);
+    return cart.items.reduce((total, item) => {
+      const price = item.price || 9.99; // Default price if not provided
+      return total + price;
+    }, 0).toFixed(2);
   };
 
   if (!token) return null;
@@ -76,7 +79,7 @@ function Cart({ token }) {
                 />
                 <div className="cart-item-details">
                   <h4>{item.title}</h4>
-                  <p>${item.price.toFixed(2)}</p>
+                  <p>${(item.price || 9.99).toFixed(2)}</p>
                 </div>
                 <button 
                   className="nav-button remove-btn" 

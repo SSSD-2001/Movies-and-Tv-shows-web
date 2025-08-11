@@ -2,7 +2,10 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-const PORT = 5000;
+const PORT = 5002;
+
+// In-memory storage for cart items (for demo purposes)
+const userCarts = new Map();
 
 // Middleware
 app.use(cors());
@@ -223,11 +226,42 @@ app.post('/api/cart/:movieId', (req, res) => {
   if (!authHeader) {
     return res.status(401).json({ error: 'Authorization token required' });
   }
-  console.log(`Added movie ${movieId} to cart`);
+  
+  // Extract user from token (for demo, use token as user ID)
+  const userId = authHeader.replace('Bearer ', '');
+  
+  // Get or create user cart
+  if (!userCarts.has(userId)) {
+    userCarts.set(userId, []);
+  }
+  
+  const userCart = userCarts.get(userId);
+  
+  // Find the movie
+  const movie = sampleMovies.find(m => m._id === movieId);
+  if (!movie) {
+    return res.status(404).json({ error: 'Movie not found' });
+  }
+  
+  // Check if movie is already in cart
+  if (!userCart.find(item => item._id === movieId)) {
+    // Add price information to the movie for cart
+    const cartItem = {
+      ...movie,
+      price: movie.type === 'movie' ? 12.99 : 8.99, // Movies cost more than TV shows
+      dateAdded: new Date().toISOString()
+    };
+    userCart.push(cartItem);
+    console.log(`Added movie "${movie.title}" to cart for user ${userId}`);
+  } else {
+    console.log(`Movie "${movie.title}" already in cart for user ${userId}`);
+  }
+  
   res.json({
     message: 'Movie added to cart successfully',
     movieId: movieId,
-    cartId: 'cart-' + Date.now()
+    movie: movie,
+    cartSize: userCart.length
   });
 });
 
@@ -237,11 +271,28 @@ app.delete('/api/cart/:movieId', (req, res) => {
   if (!authHeader) {
     return res.status(401).json({ error: 'Authorization token required' });
   }
-  console.log(`Removed movie ${movieId} from cart`);
-  res.json({
-    message: 'Movie removed from cart successfully',
-    movieId: movieId
-  });
+  
+  const userId = authHeader.replace('Bearer ', '');
+  
+  if (!userCarts.has(userId)) {
+    return res.status(404).json({ error: 'Cart not found' });
+  }
+  
+  const userCart = userCarts.get(userId);
+  const initialLength = userCart.length;
+  const updatedCart = userCart.filter(item => item._id !== movieId);
+  userCarts.set(userId, updatedCart);
+  
+  if (updatedCart.length < initialLength) {
+    console.log(`Removed movie ${movieId} from cart for user ${userId}`);
+    res.json({
+      message: 'Movie removed from cart successfully',
+      movieId: movieId,
+      cartSize: updatedCart.length
+    });
+  } else {
+    res.status(404).json({ error: 'Movie not found in cart' });
+  }
 });
 
 app.get('/api/cart', (req, res) => {
@@ -249,11 +300,20 @@ app.get('/api/cart', (req, res) => {
   if (!authHeader) {
     return res.status(401).json({ error: 'Authorization token required' });
   }
-  console.log('Fetching user cart');
+  
+  const userId = authHeader.replace('Bearer ', '');
+  const userCart = userCarts.get(userId) || [];
+  
+  // Calculate total price
+  const totalPrice = userCart.reduce((sum, item) => sum + (item.price || 9.99), 0);
+  
+  console.log(`Fetching cart for user ${userId}: ${userCart.length} items, total: $${totalPrice.toFixed(2)}`);
   res.json({
     message: 'Cart retrieved successfully',
-    items: [],
-    total: 0
+    items: userCart,
+    total: totalPrice,
+    itemCount: userCart.length,
+    cartSize: userCart.length
   });
 });
 
