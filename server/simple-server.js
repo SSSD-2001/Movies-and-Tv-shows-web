@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-const PORT = 5002;
+const PORT = 5003;
 
 // In-memory storage for cart items (for demo purposes)
 const userCarts = new Map();
@@ -188,6 +188,115 @@ app.get('/api/movies/:id', (req, res) => {
     res.json(movie);
   } catch (error) {
     console.error('Error fetching movie:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// CREATE - Add new movie/TV show
+app.post('/api/movies', (req, res) => {
+  try {
+    const { title, year, type, plot, directors, genre, rating, downloadLink } = req.body;
+    
+    // Basic validation
+    if (!title || !year || !type) {
+      return res.status(400).json({ error: 'Title, year, and type are required' });
+    }
+    
+    // Generate new ID
+    const newId = (Math.max(...sampleMovies.map(m => parseInt(m._id))) + 1).toString();
+    
+    // Create new movie/TV show object
+    const newMovie = {
+      _id: newId,
+      title: title.trim(),
+      year: year.toString(),
+      type: type.toLowerCase(),
+      plot: plot || 'No plot available',
+      directors: directors || 'Unknown',
+      genre: genre || 'Unknown',
+      rating: rating || '0.0',
+      downloadLink: downloadLink || '#'
+    };
+    
+    // Add to movies array
+    sampleMovies.push(newMovie);
+    
+    console.log(`Added new ${type}: ${title} (ID: ${newId})`);
+    res.status(201).json({
+      message: `${type} added successfully`,
+      movie: newMovie
+    });
+  } catch (error) {
+    console.error('Error creating movie:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// UPDATE - Update existing movie/TV show
+app.put('/api/movies/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, year, type, plot, directors, genre, rating, downloadLink } = req.body;
+    
+    // Find movie index
+    const movieIndex = sampleMovies.findIndex(m => m._id === id);
+    
+    if (movieIndex === -1) {
+      return res.status(404).json({ error: 'Movie not found' });
+    }
+    
+    // Update movie properties
+    const updatedMovie = {
+      ...sampleMovies[movieIndex],
+      ...(title && { title: title.trim() }),
+      ...(year && { year: year.toString() }),
+      ...(type && { type: type.toLowerCase() }),
+      ...(plot && { plot }),
+      ...(directors && { directors }),
+      ...(genre && { genre }),
+      ...(rating && { rating }),
+      ...(downloadLink && { downloadLink })
+    };
+    
+    // Replace in array
+    sampleMovies[movieIndex] = updatedMovie;
+    
+    console.log(`Updated ${updatedMovie.type}: ${updatedMovie.title} (ID: ${id})`);
+    res.json({
+      message: `${updatedMovie.type} updated successfully`,
+      movie: updatedMovie
+    });
+  } catch (error) {
+    console.error('Error updating movie:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// DELETE - Remove movie/TV show
+app.delete('/api/movies/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // Find movie index
+    const movieIndex = sampleMovies.findIndex(m => m._id === id);
+    
+    if (movieIndex === -1) {
+      return res.status(404).json({ error: 'Movie not found' });
+    }
+    
+    // Get movie info before deletion
+    const deletedMovie = sampleMovies[movieIndex];
+    
+    // Remove from array
+    sampleMovies.splice(movieIndex, 1);
+    
+    console.log(`Deleted ${deletedMovie.type}: ${deletedMovie.title} (ID: ${id})`);
+    res.json({
+      message: `${deletedMovie.type} deleted successfully`,
+      deletedMovie: deletedMovie
+    });
+  } catch (error) {
+    console.error('Error deleting movie:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

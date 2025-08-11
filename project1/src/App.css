@@ -290,6 +290,17 @@ h2 {
   transform: translateY(0);
 }
 
+.admin-button {
+  background-color: #dc3545 !important;
+  color: white !important;
+}
+
+.admin-button:hover {
+  background-color: #c82333 !important;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(220, 53, 69, 0.3);
+}
+
 .movies-button {
   background-color: #0071eb;
   color: white;

@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5002/api';
+const API_URL = 'http://localhost:5003/api';
 
 export const fetchMovies = async (query = '') => {
   try {
@@ -273,6 +273,76 @@ export const updateOrderPayment = async (orderId, paymentResult, token) => {
     return await response.json();
   } catch (error) {
     console.error('Error updating payment:', error);
+    throw error;
+  }
+};
+
+// ===== CRUD OPERATIONS FOR MOVIES/TV SHOWS =====
+
+// CREATE - Add new movie/TV show
+export const createMovie = async (movieData) => {
+  try {
+    const response = await fetch(`${API_URL}/movies`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(movieData),
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to create movie');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Error creating movie:', error);
+    throw error;
+  }
+};
+
+// UPDATE - Update existing movie/TV show
+export const updateMovie = async (id, movieData) => {
+  try {
+    const response = await fetch(`${API_URL}/movies/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(movieData),
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to update movie');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Error updating movie:', error);
+    throw error;
+  }
+};
+
+// DELETE - Remove movie/TV show
+export const deleteMovie = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/movies/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to delete movie');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Error deleting movie:', error);
     throw error;
   }
 };

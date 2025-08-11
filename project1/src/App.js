@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Header from './components/Header';
 import AboutUs from './components/AboutUs';
 import Home from './components/Home';
+import AdminPanel from './components/AdminPanel';
 import { fetchMovies } from './services/api';
 import Cart from './components/Cart';
 import { getPosterForTitle } from './utils/posterMap'; // Import at top level
@@ -105,6 +106,7 @@ function App() {
           <Route path="/login" element={<Login setIsLoggedIn={handleLogin} />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/cart" element={<Cart token={token} />} />
+          <Route path="/admin" element={<AdminPanel />} />
           <Route path="/debug" element={
             <div className="container mt-5">
               <h2>Debug Data</h2>

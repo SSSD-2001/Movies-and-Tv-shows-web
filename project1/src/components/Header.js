@@ -13,6 +13,9 @@ function Header({ isLoggedIn, setIsLoggedIn, token }) {
       </Link>
       {isLoggedIn ? (
         <>
+          <Link to="/admin">
+            <button className="nav-button admin-button">Admin</button>
+          </Link>
           <button className="nav-button" onClick={setIsLoggedIn}>
             Logout
           </button>
