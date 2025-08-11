@@ -95,6 +95,125 @@ app.get('/api/movies/:id', async (req, res) => {
 
 // Seed endpoint removed - add movies through database directly
 
+// Authentication endpoints (simple implementation)
+app.post('/api/auth/register', async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+    
+    // Simple validation
+    if (!username || !email || !password) {
+      return res.status(400).json({ error: 'Username, email, and password are required' });
+    }
+    
+    // For demo purposes, just return success
+    // In production, you'd hash the password and save to database
+    console.log(`Registration attempt: ${username}, ${email}`);
+    
+    res.json({ 
+      message: 'Registration successful',
+      user: { username, email },
+      token: 'demo-token-' + Date.now() // Simple token for demo
+    });
+  } catch (error) {
+    console.error('Registration error:', error);
+    res.status(500).json({ error: 'Registration failed' });
+  }
+});
+
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    
+    // Simple validation
+    if (!username || !password) {
+      return res.status(400).json({ error: 'Username and password are required' });
+    }
+    
+    // For demo purposes, accept any login
+    // In production, you'd verify against database
+    console.log(`Login attempt: ${username}`);
+    
+    res.json({
+      message: 'Login successful',
+      user: { username },
+      token: 'demo-token-' + Date.now() // Simple token for demo
+    });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ error: 'Login failed' });
+  }
+});
+
+// Cart endpoints (simple implementation)
+app.post('/api/cart/:movieId', async (req, res) => {
+  try {
+    const { movieId } = req.params;
+    const authHeader = req.headers.authorization;
+    
+    if (!authHeader) {
+      return res.status(401).json({ error: 'Authorization token required' });
+    }
+    
+    // For demo purposes, just return success
+    // In production, you'd save to user's cart in database
+    console.log(`Added movie ${movieId} to cart`);
+    
+    res.json({
+      message: 'Movie added to cart successfully',
+      movieId: movieId,
+      cartId: 'cart-' + Date.now()
+    });
+  } catch (error) {
+    console.error('Add to cart error:', error);
+    res.status(500).json({ error: 'Failed to add to cart' });
+  }
+});
+
+app.delete('/api/cart/:movieId', async (req, res) => {
+  try {
+    const { movieId } = req.params;
+    const authHeader = req.headers.authorization;
+    
+    if (!authHeader) {
+      return res.status(401).json({ error: 'Authorization token required' });
+    }
+    
+    // For demo purposes, just return success
+    console.log(`Removed movie ${movieId} from cart`);
+    
+    res.json({
+      message: 'Movie removed from cart successfully',
+      movieId: movieId
+    });
+  } catch (error) {
+    console.error('Remove from cart error:', error);
+    res.status(500).json({ error: 'Failed to remove from cart' });
+  }
+});
+
+app.get('/api/cart', async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    
+    if (!authHeader) {
+      return res.status(401).json({ error: 'Authorization token required' });
+    }
+    
+    // For demo purposes, return empty cart
+    // In production, you'd fetch user's cart from database
+    console.log('Fetching user cart');
+    
+    res.json({
+      message: 'Cart retrieved successfully',
+      items: [], // Empty cart for demo
+      total: 0
+    });
+  } catch (error) {
+    console.error('Get cart error:', error);
+    res.status(500).json({ error: 'Failed to get cart' });
+  }
+});
+
 // Start server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on http://localhost:${PORT}`);

@@ -97,6 +97,50 @@ const sampleMovies = [
     genre: 'Comedy, Drama',
     rating: '7.8',
     downloadLink: '#'
+  },
+  {
+    _id: '9',
+    title: 'Stranger Things',
+    year: '2016-2025',
+    type: 'tvshow',
+    plot: 'A group of kids in a small town uncover supernatural mysteries.',
+    directors: 'The Duffer Brothers',
+    genre: 'Drama, Fantasy, Horror',
+    rating: '8.7',
+    downloadLink: '#'
+  },
+  {
+    _id: '10',
+    title: 'The Crown',
+    year: '2016-2023',
+    type: 'tvshow',
+    plot: 'The reign of Queen Elizabeth II from the 1940s to modern times.',
+    directors: 'Peter Morgan',
+    genre: 'Biography, Drama, History',
+    rating: '8.6',
+    downloadLink: '#'
+  },
+  {
+    _id: '11',
+    title: 'Money Heist',
+    year: '2017-2021',
+    type: 'tvshow',
+    plot: 'A criminal mastermind manipulates the police to carry out perfect heists.',
+    directors: 'Álex Pina',
+    genre: 'Action, Crime, Mystery',
+    rating: '8.2',
+    downloadLink: '#'
+  },
+  {
+    _id: '12',
+    title: 'The Office',
+    year: '2005-2013',
+    type: 'tvshow',
+    plot: 'A mockumentary on a group of typical office workers.',
+    directors: 'Greg Daniels',
+    genre: 'Comedy',
+    rating: '9.0',
+    downloadLink: '#'
   }
 ];
 
@@ -145,8 +189,95 @@ app.get('/api/movies/:id', (req, res) => {
   }
 });
 
+// Authentication endpoints
+app.post('/api/auth/register', (req, res) => {
+  const { username, email, password } = req.body;
+  if (!username || !email || !password) {
+    return res.status(400).json({ error: 'Username, email, and password are required' });
+  }
+  console.log(`Registration: ${username}, ${email}`);
+  res.json({ 
+    message: 'Registration successful',
+    user: { username, email },
+    token: 'demo-token-' + Date.now()
+  });
+});
+
+app.post('/api/auth/login', (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).json({ error: 'Username and password are required' });
+  }
+  console.log(`Login: ${username}`);
+  res.json({
+    message: 'Login successful',
+    user: { username },
+    token: 'demo-token-' + Date.now()
+  });
+});
+
+// Cart endpoints
+app.post('/api/cart/:movieId', (req, res) => {
+  const { movieId } = req.params;
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).json({ error: 'Authorization token required' });
+  }
+  console.log(`Added movie ${movieId} to cart`);
+  res.json({
+    message: 'Movie added to cart successfully',
+    movieId: movieId,
+    cartId: 'cart-' + Date.now()
+  });
+});
+
+app.delete('/api/cart/:movieId', (req, res) => {
+  const { movieId } = req.params;
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).json({ error: 'Authorization token required' });
+  }
+  console.log(`Removed movie ${movieId} from cart`);
+  res.json({
+    message: 'Movie removed from cart successfully',
+    movieId: movieId
+  });
+});
+
+app.get('/api/cart', (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).json({ error: 'Authorization token required' });
+  }
+  console.log('Fetching user cart');
+  res.json({
+    message: 'Cart retrieved successfully',
+    items: [],
+    total: 0
+  });
+});
+
+// Error handling
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
 // Start server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Simple server running on http://localhost:${PORT}`);
   console.log(`Sample data loaded with ${sampleMovies.length} movies/shows`);
+  console.log('Server is ready to receive requests...');
 });
+
+server.on('error', (error) => {
+  console.error('Server error:', error);
+});
+
+// Keep the process alive
+setInterval(() => {
+  // This keeps the process running
+}, 60000);
