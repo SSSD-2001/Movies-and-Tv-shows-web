@@ -4,6 +4,7 @@ import chennaiExpressPoster from '../assets/chennaiexpress.jpg';
 import itEndsWithUsPoster from '../assets/itendswithus.jpg';
 import moanaPoster from '../assets/moana.jpg';
 import amaranPoster from '../assets/amaran.jpg';
+import carsPoster from '../assets/cars.jpg';
 import garfieldPoster from '../assets/garfield.jpg';
 import breakingBadPoster from '../assets/breakingbad.jpg';
 import queenOfTearsPoster from '../assets/queenoftears.jpg';
@@ -24,6 +25,7 @@ const posterMap = {
   'It ends with us': itEndsWithUsPoster,
   'Moana': moanaPoster,
   'Amaran': amaranPoster,
+  'Cars': carsPoster,
   'Garfield': garfieldPoster,
   'Breaking Bad': breakingBadPoster,
   'Queen of Tears': queenOfTearsPoster,

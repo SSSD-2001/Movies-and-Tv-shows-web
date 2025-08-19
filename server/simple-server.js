@@ -1,8 +1,13 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
-const PORT = 5003;
+const PORT = 5000;
+
+// File path for persistent storage
+const MOVIES_FILE = path.join(__dirname, 'movies-data.json');
 
 // In-memory storage for cart items (for demo purposes)
 const userCarts = new Map();
@@ -147,6 +152,39 @@ const sampleMovies = [
   }
 ];
 
+// ===== PERSISTENCE FUNCTIONS =====
+// Load movies from file or use default data
+let movies = [];
+
+function loadMoviesFromFile() {
+  try {
+    if (fs.existsSync(MOVIES_FILE)) {
+      const data = fs.readFileSync(MOVIES_FILE, 'utf8');
+      movies = JSON.parse(data);
+      console.log(`Loaded ${movies.length} movies from file`);
+    } else {
+      movies = [...sampleMovies]; // Use default data
+      saveMoviesToFile(); // Save default data to file
+      console.log(`Created new movies file with ${movies.length} default movies`);
+    }
+  } catch (error) {
+    console.error('Error loading movies from file:', error);
+    movies = [...sampleMovies]; // Fallback to default data
+  }
+}
+
+function saveMoviesToFile() {
+  try {
+    fs.writeFileSync(MOVIES_FILE, JSON.stringify(movies, null, 2));
+    console.log(`Saved ${movies.length} movies to file`);
+  } catch (error) {
+    console.error('Error saving movies to file:', error);
+  }
+}
+
+// Load movies on server start
+loadMoviesFromFile();
+
 // Routes
 app.get('/', (req, res) => {
   res.send('Movies & TV Shows API Server');
@@ -156,18 +194,18 @@ app.get('/', (req, res) => {
 app.get('/api/movies', (req, res) => {
   try {
     const { query } = req.query;
-    let movies = sampleMovies;
+    let filteredMovies = movies; // Use persistent movies data
     
     if (query) {
-      movies = movies.filter(movie => 
+      filteredMovies = movies.filter(movie => 
         movie.title.toLowerCase().includes(query.toLowerCase()) ||
         movie.genre.toLowerCase().includes(query.toLowerCase()) ||
         movie.directors.toLowerCase().includes(query.toLowerCase())
       );
     }
     
-    console.log(`Returning ${movies.length} movies`);
-    res.json(movies);
+    console.log(`Returning ${filteredMovies.length} movies`);
+    res.json(filteredMovies);
   } catch (error) {
     console.error('Error fetching movies:', error);
     res.status(500).json({ error: 'Internal server error' });
@@ -178,7 +216,7 @@ app.get('/api/movies', (req, res) => {
 app.get('/api/movies/:id', (req, res) => {
   try {
     const { id } = req.params;
-    const movie = sampleMovies.find(m => m._id === id);
+    const movie = movies.find(m => m._id === id); // Use persistent movies data
     
     if (!movie) {
       return res.status(404).json({ error: 'Movie not found' });
@@ -195,7 +233,7 @@ app.get('/api/movies/:id', (req, res) => {
 // CREATE - Add new movie/TV show
 app.post('/api/movies', (req, res) => {
   try {
-    const { title, year, type, plot, directors, genre, rating, downloadLink } = req.body;
+    const { title, year, type, plot, directors, genre, rating, downloadLink, imageUrl } = req.body;
     
     // Basic validation
     if (!title || !year || !type) {
@@ -203,7 +241,7 @@ app.post('/api/movies', (req, res) => {
     }
     
     // Generate new ID
-    const newId = (Math.max(...sampleMovies.map(m => parseInt(m._id))) + 1).toString();
+    const newId = (Math.max(...movies.map(m => parseInt(m._id))) + 1).toString();
     
     // Create new movie/TV show object
     const newMovie = {
@@ -215,11 +253,13 @@ app.post('/api/movies', (req, res) => {
       directors: directors || 'Unknown',
       genre: genre || 'Unknown',
       rating: rating || '0.0',
-      downloadLink: downloadLink || '#'
+      downloadLink: downloadLink || '#',
+      imageUrl: imageUrl || ''
     };
     
-    // Add to movies array
-    sampleMovies.push(newMovie);
+    // Add to movies array and save to file
+    movies.push(newMovie);
+    saveMoviesToFile(); // 🎯 SAVE TO FILE!
     
     console.log(`Added new ${type}: ${title} (ID: ${newId})`);
     res.status(201).json({
@@ -236,10 +276,10 @@ app.post('/api/movies', (req, res) => {
 app.put('/api/movies/:id', (req, res) => {
   try {
     const { id } = req.params;
-    const { title, year, type, plot, directors, genre, rating, downloadLink } = req.body;
+    const { title, year, type, plot, directors, genre, rating, downloadLink, imageUrl } = req.body;
     
     // Find movie index
-    const movieIndex = sampleMovies.findIndex(m => m._id === id);
+    const movieIndex = movies.findIndex(m => m._id === id);
     
     if (movieIndex === -1) {
       return res.status(404).json({ error: 'Movie not found' });
@@ -247,7 +287,7 @@ app.put('/api/movies/:id', (req, res) => {
     
     // Update movie properties
     const updatedMovie = {
-      ...sampleMovies[movieIndex],
+      ...movies[movieIndex],
       ...(title && { title: title.trim() }),
       ...(year && { year: year.toString() }),
       ...(type && { type: type.toLowerCase() }),
@@ -255,11 +295,13 @@ app.put('/api/movies/:id', (req, res) => {
       ...(directors && { directors }),
       ...(genre && { genre }),
       ...(rating && { rating }),
-      ...(downloadLink && { downloadLink })
+      ...(downloadLink && { downloadLink }),
+      ...(imageUrl !== undefined && { imageUrl })
     };
     
-    // Replace in array
-    sampleMovies[movieIndex] = updatedMovie;
+    // Replace in array and save to file
+    movies[movieIndex] = updatedMovie;
+    saveMoviesToFile(); // 🎯 SAVE TO FILE!
     
     console.log(`Updated ${updatedMovie.type}: ${updatedMovie.title} (ID: ${id})`);
     res.json({
@@ -278,17 +320,18 @@ app.delete('/api/movies/:id', (req, res) => {
     const { id } = req.params;
     
     // Find movie index
-    const movieIndex = sampleMovies.findIndex(m => m._id === id);
+    const movieIndex = movies.findIndex(m => m._id === id);
     
     if (movieIndex === -1) {
       return res.status(404).json({ error: 'Movie not found' });
     }
     
     // Get movie info before deletion
-    const deletedMovie = sampleMovies[movieIndex];
+    const deletedMovie = movies[movieIndex];
     
-    // Remove from array
-    sampleMovies.splice(movieIndex, 1);
+    // Remove from array and save to file
+    movies.splice(movieIndex, 1);
+    saveMoviesToFile(); // 🎯 SAVE TO FILE!
     
     console.log(`Deleted ${deletedMovie.type}: ${deletedMovie.title} (ID: ${id})`);
     res.json({
@@ -347,7 +390,7 @@ app.post('/api/cart/:movieId', (req, res) => {
   const userCart = userCarts.get(userId);
   
   // Find the movie
-  const movie = sampleMovies.find(m => m._id === movieId);
+  const movie = movies.find(m => m._id === movieId); // Use persistent movies data
   if (!movie) {
     return res.status(404).json({ error: 'Movie not found' });
   }

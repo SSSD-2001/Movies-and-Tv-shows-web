@@ -7,6 +7,8 @@ import Login from './components/Login';
 import Header from './components/Header';
 import AboutUs from './components/AboutUs';
 import Home from './components/Home';
+import Movies from './components/Movies';
+import TVShows from './components/TVShows';
 import AdminPanel from './components/AdminPanel';
 import { fetchMovies } from './services/api';
 import Cart from './components/Cart';
@@ -35,8 +37,10 @@ function App() {
       if (data && Array.isArray(data)) {
         // Transform the data to match our frontend structure
         const formattedMovies = data.map(movie => {
-          // Get poster from your mapping or use the filename directly
-          const posterUrl = getPosterForTitle(movie.title);
+          // Use imageUrl if available and not empty, otherwise fallback to local poster mapping
+          const posterUrl = (movie.imageUrl && movie.imageUrl.trim() !== '') 
+            ? movie.imageUrl 
+            : getPosterForTitle(movie.title);
           
           return {
             imdbID: movie._id,
@@ -84,24 +88,23 @@ function App() {
 
   // Filter movies and TV shows
   const moviesList = movies.filter(item => item.Type === 'movie');
-  const tvShowsList = movies.filter(item => item.Type === 'tvshow');
+  const tvShowsList = movies.filter(item => item.Type === 'tv');
 
   return (
     <Router>
       <div>
         <h1 className="title">
-          Movies & TV Shows
+          🍿 Popcorn Tales 🍿
           <Header isLoggedIn={isLoggedIn} setIsLoggedIn={handleLogout} />
         </h1>
-        <SearchBar onSearch={handleSearch} />
         
         {loading && <div className="text-center mt-5"><p>Loading...</p></div>}
         {error && <div className="text-center mt-5 text-danger"><p>{error}</p></div>}
         
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/movies" element={<MovieList movies={moviesList} title="Movies" />} />
-          <Route path="/tvshows" element={<MovieList movies={tvShowsList} title="TV Shows" />} />
+          <Route path="/movies" element={<Movies movies={moviesList} loading={loading} error={error} onSearch={handleSearch} />} />
+          <Route path="/tvshows" element={<TVShows movies={tvShowsList} loading={loading} error={error} onSearch={handleSearch} />} />
           <Route path="/movie/:id" element={<MovieDetails token={token} />} />
           <Route path="/login" element={<Login setIsLoggedIn={handleLogin} />} />
           <Route path="/about" element={<AboutUs />} />

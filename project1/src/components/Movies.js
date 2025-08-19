@@ -11,24 +11,11 @@ function Movies({ movies, loading, error, onSearch }) {
   return (
     <div className="movies-container" >
       <div className="category-header" >
-        <h2>- Movies -</h2>
-        
-        <div className="category-nav">
-          <button 
-            className="nav-button active"
-            disabled>
-            Movies
-          </button>
-          
-          <button 
-            className="nav-button"
-            onClick={() => navigate('/tvshows')}>
-            TV Shows
-          </button>
-        </div>
+        <h2 className="page-title">Movies</h2>
       </div>
 
-      
+      {/* Add SearchBar for Movies */}
+      <SearchBar onSearch={onSearch} />
 
       {loading ? (
         <p className="text-center">Loading movies...</p>
@@ -39,6 +26,21 @@ function Movies({ movies, loading, error, onSearch }) {
       ) : (
         <MovieList movies={moviesList} />
       )}
+
+      {/* Navigation buttons moved to bottom right */}
+      <div className="page-nav-buttons">
+        <button 
+          className="nav-button active"
+          disabled>
+          Movies
+        </button>
+        
+        <button 
+          className="nav-button"
+          onClick={() => navigate('/tvshows')}>
+          TV Shows
+        </button>
+      </div>
     </div>
   );
 }

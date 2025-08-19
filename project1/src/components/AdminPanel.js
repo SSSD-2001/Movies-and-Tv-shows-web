@@ -16,7 +16,8 @@ const AdminPanel = () => {
     directors: '',
     genre: '',
     rating: '',
-    downloadLink: ''
+    downloadLink: '',
+    imageUrl: ''
   });
 
   // Load movies on component mount
@@ -80,7 +81,8 @@ const AdminPanel = () => {
       directors: movie.directors,
       genre: movie.genre,
       rating: movie.rating,
-      downloadLink: movie.downloadLink
+      downloadLink: movie.downloadLink,
+      imageUrl: movie.imageUrl || ''
     });
     setShowForm(true);
   };
@@ -109,7 +111,8 @@ const AdminPanel = () => {
       directors: '',
       genre: '',
       rating: '',
-      downloadLink: ''
+      downloadLink: '',
+      imageUrl: ''
     });
     setSelectedMovie(null);
     setShowForm(false);
@@ -152,13 +155,12 @@ const AdminPanel = () => {
               <div className="form-group">
                 <label htmlFor="year">Year *</label>
                 <input
-                  type="number"
+                  type="text"
                   id="year"
                   name="year"
                   value={formData.year}
                   onChange={handleInputChange}
-                  min="1900"
-                  max="2030"
+                  placeholder="e.g., 2024 or 2008-2013"
                   required
                 />
               </div>
@@ -237,6 +239,30 @@ const AdminPanel = () => {
                 onChange={handleInputChange}
                 placeholder="https://..."
               />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="imageUrl">Image URL (Poster)</label>
+              <input
+                type="url"
+                id="imageUrl"
+                name="imageUrl"
+                value={formData.imageUrl}
+                onChange={handleInputChange}
+                placeholder="https://example.com/poster.jpg"
+              />
+              {formData.imageUrl && (
+                <div className="image-preview">
+                  <img 
+                    src={formData.imageUrl} 
+                    alt="Preview" 
+                    style={{ maxWidth: '100px', maxHeight: '150px', marginTop: '10px' }}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                </div>
+              )}
             </div>
 
             <div className="form-actions">

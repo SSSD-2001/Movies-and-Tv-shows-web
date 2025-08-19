@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Image URL</title>
+</head>
+<body>
+    <h1>Testing Image URL</h1>
+    
+    <h2>Direct Image Test:</h2>
+    <img src="https://via.placeholder.com/300x450/FF6B6B/FFFFFF?text=Upgraded" alt="Test Image" style="border: 2px solid black;">
+    
+    <h2>API Data Test:</h2>
+    <div id="api-result">Loading...</div>
+    
+    <h2>Movies List Test:</h2>
+    <div id="movies-list">Loading...</div>
+
+    <script>
+        // Test 1: Check if API returns correct data
+        fetch('http://localhost:5003/api/movies/13')
+            .then(response => response.json())
+            .then(movie => {
+                document.getElementById('api-result').innerHTML = `
+                    <h3>Movie Data from API:</h3>
+                    <pre>${JSON.stringify(movie, null, 2)}</pre>
+                    <h3>Image URL Test:</h3>
+                    <img src="${movie.imageUrl}" alt="${movie.title}" style="border: 2px solid blue; max-width: 200px;">
+                `;
+            })
+            .catch(error => {
+                document.getElementById('api-result').innerHTML = `Error: ${error.message}`;
+            });
+            
+        // Test 2: Check all movies
+        fetch('http://localhost:5003/api/movies')
+            .then(response => response.json())
+            .then(movies => {
+                const movieWithImage = movies.find(m => m.imageUrl && m.imageUrl.trim() !== '');
+                document.getElementById('movies-list').innerHTML = `
+                    <h3>All Movies Count: ${movies.length}</h3>
+                    <h3>Movies with imageUrl:</h3>
+                    <ul>
+                        ${movies.filter(m => m.imageUrl && m.imageUrl.trim() !== '').map(m => 
+                            `<li>${m.title} - <img src="${m.imageUrl}" alt="${m.title}" style="max-width: 100px; vertical-align: middle;"></li>`
+                        ).join('')}
+                    </ul>
+                `;
+            })
+            .catch(error => {
+                document.getElementById('movies-list').innerHTML = `Error: ${error.message}`;
+            });
+    </script>
+</body>
+</html>

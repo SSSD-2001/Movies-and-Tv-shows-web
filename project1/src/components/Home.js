@@ -9,8 +9,8 @@ function Home() {
   return (
     <div className="home-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className="welcome-message">
-        <h2>Welcome to our Movies & TV Shows platform!</h2>
-        <p>Browse our collection of movies and TV shows</p>
+        <h2>Welcome to CineVault!</h2>
+        <p>Your ultimate destination for movies and TV shows</p>
       </div>
       
       <div className="navigation-buttons">

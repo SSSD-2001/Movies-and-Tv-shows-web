@@ -79,9 +79,18 @@ app.get('/api/movies', async (req, res) => {
 app.get('/api/movies/:id', async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(`Looking for movie with ID: ${id}`);
+    
+    // Check if ID is a valid MongoDB ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      console.log(`Invalid ObjectId format: ${id}`);
+      return res.status(400).json({ error: 'Invalid movie ID format' });
+    }
+    
     const movie = await Movie.findById(id);
     
     if (!movie) {
+      console.log(`Movie not found with ID: ${id}`);
       return res.status(404).json({ error: 'Movie not found' });
     }
     

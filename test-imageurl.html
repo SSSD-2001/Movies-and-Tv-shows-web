@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Image URL Feature</title>
+</head>
+<body>
+    <h1>Test Image URL Feature</h1>
+    <button onclick="testUpdate()">Test Update Movie with Image URL</button>
+    <div id="result"></div>
+
+    <script>
+        async function testUpdate() {
+            try {
+                const response = await fetch('http://localhost:5003/api/movies/1', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: "Wild Robot",
+                        year: "2024",
+                        type: "movie",
+                        plot: "An animated adventure about a robot stranded on an island.",
+                        directors: "Chris Sanders",
+                        genre: "Animation, Adventure, Family",
+                        rating: "8.0",
+                        downloadLink: "#",
+                        imageUrl: "https://via.placeholder.com/300x450/0066CC/FFFFFF?text=Wild+Robot"
+                    })
+                });
+                
+                const result = await response.json();
+                document.getElementById('result').innerHTML = 
+                    '<h3>✅ Success!</h3><pre>' + JSON.stringify(result, null, 2) + '</pre>';
+                    
+                // Test fetching the updated movie
+                const fetchResponse = await fetch('http://localhost:5003/api/movies/1');
+                const movie = await fetchResponse.json();
+                document.getElementById('result').innerHTML += 
+                    '<h3>Updated Movie Data:</h3><pre>' + JSON.stringify(movie, null, 2) + '</pre>';
+                    
+            } catch (error) {
+                document.getElementById('result').innerHTML = 
+                    '<h3>❌ Error:</h3><p>' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>

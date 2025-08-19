@@ -5,32 +5,16 @@ import SearchBar from './SearchBar';
 
 function TVShows({ movies, loading, error, onSearch }) {
   const navigate = useNavigate();
-  const tvShowsList = movies.filter(movie => movie.Type === 'tvshow');
+  const tvShowsList = movies.filter(movie => movie.Type === 'tv');
 
   return (
     <div className="tvshows-container">
       <div className="category-header">
-        <h2>- TV Shows -</h2>
-        
-        <div className="category-nav">
-          <button 
-            className="nav-button"
-            onClick={() => navigate('/movies')}
-          >
-            Movies
-          </button>
-          
-          <button 
-            className="nav-button active"
-            disabled
-          >
-            TV Shows
-          </button>
-        </div>
+        <h2 className="page-title">TV Shows</h2>
       </div>
 
-      {/* Add SearchBar here */}
-      
+      {/* Add SearchBar for TV Shows */}
+      <SearchBar onSearch={onSearch} />
 
       {/* Rest of component remains the same */}
       {loading ? (
@@ -42,6 +26,23 @@ function TVShows({ movies, loading, error, onSearch }) {
       ) : (
         <MovieList movies={tvShowsList} />
       )}
+
+      {/* Navigation buttons moved to bottom right */}
+      <div className="page-nav-buttons">
+        <button 
+          className="nav-button"
+          onClick={() => navigate('/movies')}
+        >
+          Movies
+        </button>
+        
+        <button 
+          className="nav-button active"
+          disabled
+        >
+          TV Shows
+        </button>
+      </div>
     </div>
   );
 }

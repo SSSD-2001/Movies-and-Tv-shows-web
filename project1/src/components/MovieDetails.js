@@ -49,27 +49,20 @@ function MovieDetails({ token }) {
       try {
         const movieData = await fetchMovieById(id);
         if (movieData) {
-          // Sample descriptions based on title - in a real app, this would come from your backend
-          const descriptions = {
-            'Wild Robot': 'A robot named Roz is shipwrecked on an island and learns to adapt to the environment while raising an orphaned gosling.',
-            'Chennai Express': 'A mans journey from Mumbai to Rameshwaram and what happens along the way when he falls in love with the daughter of a local don.',
-            'It ends with us': 'A heartbreaking story about breaking the cycle of abuse and making difficult choices for a better future.',
-            'Moana': 'An adventurous teenager sails out on a daring mission to save her people and discover the truth about her heritage.',
-            'Amaran': 'The story of a brave soldier who sacrifices everything to protect his country.',
-            'Breaking Bad': 'A high school chemistry teacher diagnosed with cancer turns to manufacturing methamphetamine to secure his familys financial future.',
-            'Queen of Tears': 'A romantic drama about a couple navigating the challenges of marriage and the complexities of life.',
-            'Ginny & Georgia': 'A mother-daughter relationship drama with plenty of secrets and complicated relationships.'
-          };
-
           setMovie({
             imdbID: movieData._id,
             Title: movieData.title,
             Year: movieData.year,
-            Poster: getPosterForTitle(movieData.title),
+            Poster: (movieData.imageUrl && movieData.imageUrl.trim() !== '') 
+              ? movieData.imageUrl 
+              : getPosterForTitle(movieData.title),
             Type: movieData.type,
             Subtitles: movieData.subtitles,
             DownloadLink: movieData.downloadLink,
-            Description: descriptions[movieData.title] || 'No description available for this title.'
+            Description: movieData.plot || 'No description available for this title.',
+            Directors: movieData.directors || 'Unknown',
+            Genre: movieData.genre || 'Unknown',
+            Rating: movieData.rating || 'Not rated'
           });
         }
       } catch (err) {
@@ -131,9 +124,13 @@ function MovieDetails({ token }) {
       />
       
       <h2>{movie.Title}</h2>
-      <p className="movie-description">{movie.Description}</p>
-      <p>Year: {movie.Year}</p>
-      <p>Subtitles: {movie.Subtitles}</p>
+      <p className="movie-description">{movie.plot}</p>
+      <p><strong>Year:</strong> {movie.Year}</p>
+      <p><strong>Genre:</strong> {movie.Genre}</p>
+      <p><strong>Directors:</strong> {movie.Directors}</p>
+      <p><strong>Rating:</strong> {movie.Rating}</p>
+      <p><strong>Type:</strong> {movie.Type === 'movie' ? 'Movie' : 'TV Show'}</p>
+      <p><strong>Subtitles:</strong> {movie.Subtitles ? 'Available' : 'Not Available'}</p>
       
       <div className="button-group">
         <a href={movie.DownloadLink} className="nav-button download-btn">
