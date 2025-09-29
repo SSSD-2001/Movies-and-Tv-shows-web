@@ -5,18 +5,21 @@ function AboutUs() {
   return (
     <div className="about-us">
       <div className="hero-section">
-        <h1>About CineFlow</h1>
+        <h1>About Popcorn Tales</h1>
         <p className="hero-subtitle">
-          Your Ultimate Entertainment Hub for Movies & TV Shows
+          Popcorn Tales is your all-in-one destination for movies and TV shows, offering a vast content library, 
+          smart shopping cart, secure authentication, and seamless browsing across all devices. 
+          Designed with both users and admins in mind, it combines cutting-edge technology, 
+          real-time updates, and a sleek responsive interface to deliver an engaging and effortless entertainment experience.
         </p>
       </div>
 
       <div className="content-sections">
         <section className="intro-section">
-          <h2>Welcome to CineFlow</h2>
+          <h2>Welcome to Popcorn Tales!</h2>
           <p>
-            CineFlow is a state-of-the-art streaming platform that brings you the latest movies and TV shows 
-            with cutting-edge technology and an intuitive user experience. Our platform combines powerful 
+            Popcorn Tales is a state-of-the-art streaming platform that brings you the latest movies and TV shows
+            with cutting-edge technology and an intuitive user experience. Our platform combines powerful
             content management capabilities with a sleek, responsive design to deliver entertainment at your fingertips.
           </p>
         </section>

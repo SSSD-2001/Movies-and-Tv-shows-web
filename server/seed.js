@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/moviesdb')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/movies_app')
   .then(() => console.log('MongoDB Connected for seeding'))
   .catch(err => console.error('MongoDB Connection Error:', err));
 

@@ -94,8 +94,8 @@ function App() {
     <Router>
       <div>
         <h1 className="title">
-          🍿 Popcorn Tales 🍿
-          <Header isLoggedIn={isLoggedIn} setIsLoggedIn={handleLogout} />
+          🍿 Popcorn Tales
+          <Header isLoggedIn={isLoggedIn} setIsLoggedIn={handleLogout} token={token} />
         </h1>
         
         {loading && <div className="text-center mt-5"><p>Loading...</p></div>}
