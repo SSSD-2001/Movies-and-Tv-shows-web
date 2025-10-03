@@ -63,31 +63,12 @@
   color: white;
 }
 
-.movies-btn {
-  background: linear-gradient(#5ca7e4);
-  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
-  font-weight: 600;
-  border-radius: 15px;
-  padding: 12px 24px;
-  font-size: 16px;
-  box-shadow: 0 2px 8px #0783e94d;
+.movies-btn, .tvshows-btn {
+  background: linear-gradient(135deg, #5ca7e4, #4a90e2);
+  box-shadow: 0 2px 8px rgba(7, 131, 233, 0.3);
 }
 
-.movies-btn:hover {
-  box-shadow: 0 4px 12px rgba(92, 167, 228, 0.4);
-}
-
-.tvshows-btn {
-  background: linear-gradient(#5ca7e4);
-  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
-  font-weight: 600;
-  border-radius: 15px;
-  padding: 12px 24px;
-  font-size: 16px;
-  box-shadow: 0 2px 8px #0783e94d;
-}
-
-.tvshows-btn:hover {
+.movies-btn:hover, .tvshows-btn:hover {
   box-shadow: 0 4px 12px rgba(92, 167, 228, 0.4);
 }
 
@@ -114,7 +95,7 @@
     width: 100%;
   }
   
-  .btn-nav, .btn-primary {
+  .btn-nav {
     min-width: 120px;
     flex: 1;
   }

@@ -1,12 +1,7 @@
 const express = require('express');
-// User Schema
-const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  role: { type: String, enum: ['user', 'admin'], default: 'user' },
-  createdAt: { type: Date, default: Date.now }
-});
+const cors = require('cors');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 // Admin email configuration - only these emails can be admins
 const ADMIN_EMAILS = [
@@ -19,39 +14,6 @@ const ADMIN_EMAILS = [
 const isAdminEmail = (email) => {
   return ADMIN_EMAILS.includes(email.toLowerCase());
 };
-
-// Middleware to verify admin access
-const verifyAdmin = async (req, res, next) => {
-  try {
-    const { authorization } = req.headers;
-    
-    if (!authorization) {
-      return res.status(401).json({ error: 'Access denied. No token provided.' });
-    }
-    
-    // For this demo, we'll extract user info from a simple token
-    // In production, use proper JWT verification
-    const token = authorization.replace('Bearer ', '');
-    
-    if (!token.startsWith('auth-token-')) {
-      return res.status(401).json({ error: 'Invalid token format' });
-    }
-    
-    // For demo purposes, we'll check if user has admin role
-    // In production, decode JWT and verify admin role
-    const { userRole } = req.body;
-    
-    if (userRole !== 'admin') {
-      return res.status(403).json({ error: 'Access denied. Admin privileges required.' });
-    }
-    
-    next();
-  } catch (error) {
-    res.status(500).json({ error: 'Token verification failed' });
-  }
-};require('cors');
-const mongoose = require('mongoose');
-require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -96,6 +58,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  role: { type: String, enum: ['user', 'admin'], default: 'user' },
   createdAt: { type: Date, default: Date.now }
 });
 
