@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchMovies, createMovie, updateMovie, deleteMovie } from '../services/api';
 import './AdminPanel.css';
 
@@ -54,11 +55,13 @@ const AdminPanel = () => {
       if (selectedMovie) {
         // Update existing movie
         const response = await updateMovie(selectedMovie._id, formData);
-        setMessage(response.message);
+        const pageLink = formData.type === 'movie' ? '/movies' : '/tvshows';
+        setMessage(`${response.message} ✨ View it on the ${formData.type === 'movie' ? 'Movies' : 'TV Shows'} page!`);
       } else {
         // Create new movie
         const response = await createMovie(formData);
-        setMessage(response.message);
+        const pageLink = formData.type === 'movie' ? '/movies' : '/tvshows';
+        setMessage(`${response.message} ✨ View it on the ${formData.type === 'movie' ? 'Movies' : 'TV Shows'} page!`);
       }
       
       // Reload movies and reset form
@@ -121,13 +124,27 @@ const AdminPanel = () => {
   return (
     <div className="admin-panel">
       <div className="admin-header">
-        <h1>Admin Panel - Movie Management</h1>
-        <button 
-          className="btn-primary"
-          onClick={() => setShowForm(!showForm)}
-        >
-          {showForm ? 'Cancel' : 'Add New Movie/TV Show'}
-        </button>
+        <h1>Admin Panel</h1>
+        <div className="admin-actions">
+          <div className="navigation-buttons">
+            <Link to="/movies">
+              <button className="btn-nav movies-btn">
+                🎬 View Movies
+              </button>
+            </Link>
+            <Link to="/tvshows">
+              <button className="btn-nav tvshows-btn">
+                📺 View TV Shows
+              </button>
+            </Link>
+          </div>
+          <button 
+            className="btn-primary"
+            onClick={() => setShowForm(!showForm)}
+          >
+            {showForm ? 'Cancel' : 'Add New Movie/TV Show'}
+          </button>
+        </div>
       </div>
 
       {message && (

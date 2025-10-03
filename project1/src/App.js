@@ -10,6 +10,7 @@ import Home from './components/Home';
 import Movies from './components/Movies';
 import TVShows from './components/TVShows';
 import AdminPanel from './components/AdminPanel';
+import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 import { fetchMovies } from './services/api';
 import Cart from './components/Cart';
 import { getPosterForTitle } from './utils/posterMap'; // Import at top level
@@ -22,6 +23,9 @@ function App() {
   const [error, setError] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [isLoggedIn, setIsLoggedIn] = useState(!!token);
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem('userData') || '{}')
+  );
 
   useEffect(() => {
     // Load movies when component mounts
@@ -80,10 +84,12 @@ function App() {
     setIsLoggedIn(true);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
+    const handleLogout = () => {
     setToken('');
     setIsLoggedIn(false);
+    setUserData({});
+    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
   };
 
   // Filter movies and TV shows
@@ -98,6 +104,15 @@ function App() {
           <Header isLoggedIn={isLoggedIn} setIsLoggedIn={handleLogout} token={token} />
         </h1>
         
+        {/* Floating User Badge - Bottom Left Corner */}
+        {isLoggedIn && (
+          <div className="floating-user-badge">
+            <span className="user-role-badge">
+              {userData.role === 'admin' ? '⚙️ Admin' : '🎬 User'}: {userData.username}
+            </span>
+          </div>
+        )}
+        
         {loading && <div className="text-center mt-5"><p>Loading...</p></div>}
         {error && <div className="text-center mt-5 text-danger"><p>{error}</p></div>}
         
@@ -109,7 +124,12 @@ function App() {
           <Route path="/login" element={<Login setIsLoggedIn={handleLogin} />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/cart" element={<Cart token={token} />} />
-          <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/admin" element={
+            <ProtectedAdminRoute>
+              <AdminPanel />
+            </ProtectedAdminRoute>
+          } />
+          <Route path="/admin-direct" element={<AdminPanel />} />
           <Route path="/debug" element={
             <div className="container mt-5">
               <h2>Debug Data</h2>

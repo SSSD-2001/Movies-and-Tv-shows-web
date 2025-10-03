@@ -92,6 +92,28 @@ export const addToFavorites = async (movieId, token) => {
   }
 };
 
+export const verifyAdminStatus = async (email) => {
+  try {
+    const response = await fetch(`${API_URL}/auth/verify-admin`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Admin verification failed');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Admin verification error:', error);
+    throw error;
+  }
+};
+
 export const getUserProfile = async (token) => {
   try {
     const response = await fetch(`${API_URL}/auth/profile`, {

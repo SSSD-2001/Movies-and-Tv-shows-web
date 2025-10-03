@@ -3,6 +3,20 @@ import { Link } from 'react-router-dom';
 import CartIcon from './CartIcon';
 
 function Header({ isLoggedIn, setIsLoggedIn, token }) {
+  const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+  
+  // Admin emails list (same as backend and ProtectedAdminRoute)
+  const ADMIN_EMAILS = [
+    'admin@popcorntales.com',
+    'admin@gmail.com',
+    'superadmin@popcorntales.com'
+  ];
+  
+  // Check admin status by role OR email (fallback)
+  const isAdminByRole = userData.role === 'admin';
+  const isAdminByEmail = userData.email && ADMIN_EMAILS.includes(userData.email.toLowerCase());
+  const isAdmin = isAdminByRole || isAdminByEmail;
+  
   return (
     <div className="header-buttons">
       <Link to="/">
@@ -13,9 +27,11 @@ function Header({ isLoggedIn, setIsLoggedIn, token }) {
       </Link>
       {isLoggedIn ? (
         <>
-          <Link to="/admin">
-            <button className="nav-button admin-button">Admin</button>
-          </Link>
+          {isAdmin && (
+            <Link to="/admin">
+              <button className="nav-button admin-button">Admin Panel</button>
+            </Link>
+          )}
           <button className="nav-button" onClick={setIsLoggedIn}>
             Logout
           </button>

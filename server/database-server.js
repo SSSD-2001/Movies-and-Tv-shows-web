@@ -1,5 +1,55 @@
 const express = require('express');
-const cors = require('cors');
+// User Schema
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: String, enum: ['user', 'admin'], default: 'user' },
+  createdAt: { type: Date, default: Date.now }
+});
+
+// Admin email configuration - only these emails can be admins
+const ADMIN_EMAILS = [
+  'admin@popcorntales.com',
+  'admin@gmail.com',
+  'superadmin@popcorntales.com'
+];
+
+// Function to check if email is an admin email
+const isAdminEmail = (email) => {
+  return ADMIN_EMAILS.includes(email.toLowerCase());
+};
+
+// Middleware to verify admin access
+const verifyAdmin = async (req, res, next) => {
+  try {
+    const { authorization } = req.headers;
+    
+    if (!authorization) {
+      return res.status(401).json({ error: 'Access denied. No token provided.' });
+    }
+    
+    // For this demo, we'll extract user info from a simple token
+    // In production, use proper JWT verification
+    const token = authorization.replace('Bearer ', '');
+    
+    if (!token.startsWith('auth-token-')) {
+      return res.status(401).json({ error: 'Invalid token format' });
+    }
+    
+    // For demo purposes, we'll check if user has admin role
+    // In production, decode JWT and verify admin role
+    const { userRole } = req.body;
+    
+    if (userRole !== 'admin') {
+      return res.status(403).json({ error: 'Access denied. Admin privileges required.' });
+    }
+    
+    next();
+  } catch (error) {
+    res.status(500).json({ error: 'Token verification failed' });
+  }
+};require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
@@ -163,6 +213,19 @@ app.get('/api/movies', async (req, res) => {
       if (movieData.type === 'tvshow') {
         movieData.type = 'tv';
       }
+      
+      // Transform poster field to imageUrl for frontend compatibility
+      if (movieData.poster && !movieData.imageUrl) {
+        movieData.imageUrl = movieData.poster;
+      }
+      
+      // Add missing fields with defaults if they don't exist
+      if (!movieData.plot) movieData.plot = 'No plot available';
+      if (!movieData.directors) movieData.directors = 'Unknown';
+      if (!movieData.genre) movieData.genre = 'Unknown';
+      if (!movieData.rating) movieData.rating = '0.0';
+      if (!movieData.downloadLink) movieData.downloadLink = '#';
+      if (!movieData.imageUrl) movieData.imageUrl = '';
       
       return movieData;
     });
@@ -353,11 +416,16 @@ app.post('/api/auth/register', async (req, res) => {
     
     console.log('No existing user found, creating new user...');
     
+    // Determine user role based on email
+    const userRole = isAdminEmail(email) ? 'admin' : 'user';
+    console.log(`Assigning role: ${userRole} for email: ${email}`);
+    
     // Create new user (in production, hash the password first)
     const newUser = new User({
       username: username,
       email: email,
-      password: password // Note: In production, hash this with bcrypt
+      password: password, // Note: In production, hash this with bcrypt
+      role: userRole
     });
     
     console.log('User object created, attempting to save to MongoDB...');
@@ -373,7 +441,12 @@ app.post('/api/auth/register', async (req, res) => {
     
     res.status(201).json({ 
       message: 'Registration successful - User saved to MongoDB',
-      user: { username, email, id: savedUser._id },
+      user: { 
+        username, 
+        email, 
+        id: savedUser._id,
+        role: savedUser.role
+      },
       token: 'demo-token-' + Date.now()
     });
   } catch (error) {
@@ -420,15 +493,42 @@ app.post('/api/auth/login', async (req, res) => {
     }
     
     console.log(`✅ LOGIN SUCCESSFUL: ${username} authenticated from MongoDB database`);
+    console.log(`User role: ${user.role}`);
     
     res.json({
       message: 'Login successful - User verified from MongoDB',
-      user: { username: user.username, email: user.email, id: user._id },
+      user: { 
+        username: user.username, 
+        email: user.email, 
+        id: user._id,
+        role: user.role
+      },
       token: 'auth-token-' + Date.now() // Simple token for demo
     });
   } catch (error) {
     console.error('❌ LOGIN ERROR:', error);
     res.status(500).json({ error: 'Login failed: ' + error.message });
+  }
+});
+
+// Endpoint to verify admin status
+app.post('/api/auth/verify-admin', async (req, res) => {
+  try {
+    const { email } = req.body;
+    
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required' });
+    }
+    
+    const isAdmin = isAdminEmail(email);
+    
+    res.json({
+      isAdmin: isAdmin,
+      message: isAdmin ? 'Admin access granted' : 'Regular user access'
+    });
+  } catch (error) {
+    console.error('Admin verification error:', error);
+    res.status(500).json({ error: 'Verification failed' });
   }
 });
 

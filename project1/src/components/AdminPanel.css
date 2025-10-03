@@ -21,6 +21,66 @@
   color: #333;
   margin: 0;
   font-size: 2rem;
+  flex: 1;
+}
+
+.admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navigation-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-nav {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.btn-nav:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+  text-decoration: none;
+  color: white;
+}
+
+.movies-btn {
+  background: linear-gradient(#5ca7e4);
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-size: 16px;
+  box-shadow: 0 2px 8px #0783e94d;
+}
+
+.movies-btn:hover {
+  box-shadow: 0 4px 12px rgba(92, 167, 228, 0.4);
+}
+
+.tvshows-btn {
+  background: linear-gradient(#5ca7e4);
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-size: 16px;
+  box-shadow: 0 2px 8px #0783e94d;
+}
+
+.tvshows-btn:hover {
+  box-shadow: 0 4px 12px rgba(92, 167, 228, 0.4);
 }
 
 .btn-primary {

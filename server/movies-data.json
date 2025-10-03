@@ -142,5 +142,65 @@
     "rating": "9.0",
     "downloadLink": "#",
     "imageUrl": ""
+  },
+  {
+    "_id": "15",
+    "title": "My Oxford Year",
+    "year": "2025",
+    "type": "movie",
+    "plot": "An ambitious American student travels to Oxford in England to fulfill her dream, but encounters a charming local who changes both their lives.",
+    "directors": " Iain Morris",
+    "genre": "Romance",
+    "rating": "5.9",
+    "downloadLink": "#",
+    "imageUrl": "https://images.justwatch.com/poster/332746595/s718/my-oxford-year.jpg"
+  },
+  {
+    "_id": "16",
+    "title": "How to Train Your Dragon",
+    "year": "2025",
+    "type": "movie",
+    "plot": "On the rugged isle of Berk, a Viking boy named Hiccup defies centuries of tradition by befriending a dragon named Toothless. However, when an ancient threat emerges that endangers both species, Hiccup's friendship with Toothless becomes the key to forging a new future. Together, they must navigate the delicate path toward peace, soaring beyond the boundaries of their worlds and redefining what it means to be a hero and a leader.",
+    "directors": "Dean DeBlois",
+    "genre": "Fantasy, Adventure",
+    "rating": "7.8",
+    "downloadLink": "https://www.google.com/search?cs=1&sxsrf=AE3TifMk7589Iy_v5_FKCaZkZmalzdN_Mw:1759514144789&q=How+to+Train+Your+Dragon&stick=H4sIAAAAAAAAAE2Tu47UMBSGtUizWg0godkCRDXiAZgk49xWoqOg2Y6Gypo4G3vsxHFs40seg0egpuA14AEoKeh4A0oWUE4oP_v85_If-2rz4vGBHtJUKO8s62J2OYzufGe-Xvw7DynRNZZ44SGnJPjquPCiW7i3ikpUpAs7oRIeCYV4zVVW9d3C-mhzUrBsYR_SmpEc9F4ZNZcIQT8tKweOID6SphQ-kVBvmqVUBvpzSg4Fxxb0CfPGzxruk8G7CnFgT9EwlZDPuEZkbVVAP9b5ToiwMJcqrQ0tIb8rLSqaHpgmqLk3EPLFtBc1Ae58mRQ-gfwuz_rgC5jPZjbMLRX_6xPEc-CuQTrPoV7sJtWQYw37IjiLtIJ8QcpQZB30r00raJWv82HXt2VSrvsl81xoiA_ETDXj4G9smJh0BfsKqTtWcfU_dpI6PMG8wcggmwj7JNlkYqgn6McSxQwiC1OM8dAxtvpL1RG1UC9SSmvPIJ5RxNIJgT_e9_lcxHrVGzI4Bu_PWST13LDVr9AF6xqIrzOtOQf9_XvgWULij4tXD5_8_PX9-jn68OnLt4uX26eC3ByGu_Z8uvHsZLEdsT9ZwnbX283tn-Pddne1vbz9-70efdw8ezP6vR33b_XpLPfvxvd6_1qf6Cg_bx78Bis9L9-XAwAA",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/8/80/How_To_Train_Your_Dragon_2025_Poster.jpg"
+  },
+  {
+    "_id": "17",
+    "title": "The Ruse",
+    "year": "2024",
+    "type": "movie",
+    "plot": "An in-home caregiver fears for her life after being assigned to a mysterious elderly patient in a remote seaside home.",
+    "directors": "Mindy Kaling",
+    "genre": "Thriller",
+    "rating": "6.9",
+    "downloadLink": "https://www.google.com/search?sxsrf=AE3TifMHx78C19wQq7nR0yJENaMmaQNNag:1759514276896&q=The+Ruse&stick=H4sIAAAAAAAAAE2TPY7UMBTHNUgzGg0godkCiQpxACZxnK-VOMI2iN6aOBN77cTrxMYfOQXiCNRbcA04ACUFHTegZAHlhfJnv4__-z97v3319MROaWpcI1BCI9oNd-72Yr5u_p2HlE41UWThIWc0-CpbWGrvLO_iwr3VTOEiXdhJnYhIGcRPQqOq7xaeMpvTgqOFfUhrTnPI99roucQY9LS8HASG-EibUvpEQb9xVkob0Oe0GgpBLOQn3Bs_T3CfDN5VWAB7hoexhHoPvkjUVgXosc53UoaFhdJpbVgJ9V1pcdH0wCzBzYOBUC-mvawpcOfLpPAJ1Hc56oMvYD6LbJhbJv_PT7DIgbsGT3kO_WI36oZmNeyLEhRZBfWCUqFAHeifTCtZla_zEde3ZVKu-6XzXEwQH6gZay7A39hwOU4V7CukLqvi6n_sFHNkhHmDUUE1EfZJ0WhiqEfQY6nmBtOFGSFk6Dhf_WU6wy30i4yx2nOI5wzzdMTgj_d9PhexXvMNHRyH9-csVtPc8NWv0AXrGoiv0TQJAfnLP_mxefP42c9f369e4I_3X75tXh-eS3p9Gi7t7fna87Ml9o74s6X8eHXY3vw5Ph6O-8Pu5u_3evJpu3_HLy_fvjeXz9tHH3ab3y0CzgyKAwAA&stq=1&cs=1&lei=tw7gaOa3DpTY1e8PyM-H4QM",
+    "imageUrl": "https://resizing.flixster.com/SpAKGordoV7SiKatdFzl4L7FWdo=/206x305/v2/https://resizing.flixster.com/2s3m4kFuvtzMqWDAONavY7anM_0=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzYwMGQyMTQ4LTE2OWQtNDQ4Yy1iMGFiLTBlNWRiMmUwMTg4OC5wbmc="
+  },
+  {
+    "_id": "18",
+    "title": "Good Boy",
+    "year": "2025",
+    "type": "tv",
+    "plot": "Olympic medallists join the police force through a special recruitment program, trading medals for badges as they tackle violent crimes and injustices with their athletic skills.",
+    "directors": "Yoon Dong-Ju ",
+    "genre": "Crime, Drama",
+    "rating": "0.0",
+    "downloadLink": "#",
+    "imageUrl": "https://resizing.flixster.com/Gr3lq6gbTzqYFD7vbE5bM4Yynmw=/fit-in/352x330/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p30240589_b_v9_aa.jpg"
+  },
+  {
+    "_id": "19",
+    "title": "The Lord of the Rings: The Rings of Power",
+    "year": "2022",
+    "type": "tv",
+    "plot": "This series brings to screens for the very first time the heroic legends of the fabled Second Age of Middle-earth's history. This epic drama is set thousands of years before the events of J.R.R. Tolkien's \"The Hobbit\" and \"The Lord of the Rings,\" and takes viewers back to an era in which great powers were forged, kingdoms rose to glory and fell to ruin, unlikely heroes were tested, hope hung by the finest of threads and the greatest villain that ever flowed from Tolkien's pen threatened to cover all the world in darkness. Beginning in a time of relative peace, the series follows an ensemble cast of characters, both familiar and new, as they confront the long-feared reemergence of evil to Middle-earth. From the darkest depths of the Misty Mountains, to the majestic forests of the elf-capital of Lindon, to the breathtaking island kingdom of Númenor, to the furthest reaches of the map, these kingdoms and characters carve out legacies that live on long after they are gone.",
+    "directors": "J. D. Payne and Patrick McKay",
+    "genre": " Action, Adventure, Science fiction, Drama, Mystery",
+    "rating": "6.9",
+    "downloadLink": "https://share.google/jJtOpzgRq3KhImlVr",
+    "imageUrl": "https://m.media-amazon.com/images/M/MV5BNmVmZGQ2ZTctYzE4NC00YzkxLThhNjYtNGIyZjJmZGEwMjUzXkEyXkFqcGc@._V1_.jpg"
   }
 ]
