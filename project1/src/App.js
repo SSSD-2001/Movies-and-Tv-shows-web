@@ -30,7 +30,15 @@ function App() {
   useEffect(() => {
     // Load movies when component mounts
     loadMovies();
-  }, []);
+    
+    // Load user data if token exists
+    if (token && !userData.username) {
+      const savedUserData = JSON.parse(localStorage.getItem('userData') || '{}');
+      if (savedUserData.username) {
+        setUserData(savedUserData);
+      }
+    }
+  }, [token]);
 
   const loadMovies = async (query = '') => {
     setLoading(true);
@@ -105,11 +113,13 @@ function App() {
         </h1>
         
         {/* Floating User Badge - Bottom Left Corner */}
-        {isLoggedIn && (
+        {isLoggedIn && userData && (
           <div className="floating-user-badge">
             <span className="user-role-badge">
-              {userData.role === 'admin' ? '⚙️ Admin' : '🎬 User'}: {userData.username}
+              {userData.role === 'admin' ? '⚙️ Admin' : '🎬 User'}: {userData.username || 'User'}
             </span>
+            {/* Debug info - remove this later */}
+            {console.log('🔍 Current userData in App.js:', userData)}
           </div>
         )}
         

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getCart, removeFromCart } from '../services/api';
+import { getPosterForTitle } from '../utils/posterMap';
 import '../App.css';
 
 function Cart({ token }) {
@@ -66,10 +67,22 @@ function Cart({ token }) {
       ) : (
         <div className="cart-content">
           <div className="cart-items">
-            {cart.items.map((item) => (
+            {cart.items.map((item) => {
+              // Determine the best image source
+              const imageSource = item.imageUrl || item.poster || getPosterForTitle(item.title);
+              
+              // Debug logging
+              console.log('🔍 Cart item debug:', {
+                title: item.title,
+                imageUrl: item.imageUrl,
+                poster: item.poster,
+                finalImageSource: imageSource
+              });
+              
+              return (
               <div key={item.movieId} className="cart-item">
                 <img 
-                  src={item.poster} 
+                  src={imageSource} 
                   alt={item.title} 
                   className="cart-item-image"
                   onError={(e) => {
@@ -88,7 +101,8 @@ function Cart({ token }) {
                   Remove
                 </button>
               </div>
-            ))}
+              );
+            })}
           </div>
             <div className="cart-summary">
                 <h3>Order Summary</h3>

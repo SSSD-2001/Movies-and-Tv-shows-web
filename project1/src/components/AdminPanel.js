@@ -127,23 +127,19 @@ const AdminPanel = () => {
         <h1>Admin Panel</h1>
         <div className="admin-actions">
           <div className="navigation-buttons">
-            <Link to="/movies">
-              <button className="btn-nav movies-btn">
-                🎬 View Movies
-              </button>
+            <Link to="/movies" className="btn-nav movies-btn">
+              🎬 View Movies
             </Link>
-            <Link to="/tvshows">
-              <button className="btn-nav tvshows-btn">
-                📺 View TV Shows
-              </button>
+            <Link to="/tvshows" className="btn-nav tvshows-btn">
+              📺 View TV Shows
             </Link>
+            <button 
+              className="btn-nav btn-primary"
+              onClick={() => setShowForm(!showForm)}
+            >
+              {showForm ? 'Cancel' : 'Add New Movie/TV Show'}
+            </button>
           </div>
-          <button 
-            className="btn-primary"
-            onClick={() => setShowForm(!showForm)}
-          >
-            {showForm ? 'Cancel' : 'Add New Movie/TV Show'}
-          </button>
         </div>
       </div>
 

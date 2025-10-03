@@ -11,10 +11,10 @@ body {
 
 .title{
   background: linear-gradient(135deg, #4a90e2, #2c5aa0, #1e3a5f);
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   padding: 25px 20px;
   font-size: 3.7rem;
   font-weight: bold;
-  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   text-align: left;
   color: white;
   position: relative;
@@ -73,6 +73,7 @@ h2 {
 .search-bar input {
   width: 50%;
   padding: 10px;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   border: 1px solid #ddd;
   border-radius: 5px 0 0 5px;
   outline: none;
@@ -82,6 +83,7 @@ h2 {
   padding: 10px 20px;
   border: none;
   background-color: #0071eb;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   color: white;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
@@ -99,6 +101,7 @@ h2 {
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #fff;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   text-align: center;
 }
 
@@ -126,6 +129,7 @@ h2 {
   padding: 10px 20px;
   border: none;
   background-color: #0071eb;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   color: white;
   border-radius: 5px;
   cursor: pointer;
@@ -140,6 +144,7 @@ h2 {
 .btn-light-blue {
   background-color: #add8e6;
   color: black;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -163,6 +168,7 @@ h2 {
 
 .movie-details h2 {
   margin-top: 20px;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
 }
 
 .movie-details p {
@@ -173,6 +179,7 @@ h2 {
   padding: 10px 20px;
   border: none;
   background-color: #007bff;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   color: white;
   border-radius: 5px;
   cursor: pointer;
@@ -184,6 +191,7 @@ h2 {
 
 .btn-more-details {
   background-color: #0071eb;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -200,6 +208,7 @@ h2 {
   padding: 20px;
   /*background-image: url('./assets/popcorn bg.jpg'); /* Adjust the path as needed */
   background-size: cover;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   background-position: center;
 }
 
@@ -215,6 +224,7 @@ h2 {
 /* Home Page Styles */
 .home-container {
   display: flex;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -283,6 +293,7 @@ h2 {
   transition: all 0.3s ease;
   font-weight: 600;
   background-color: #0071eb;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 5px;
@@ -311,11 +322,13 @@ h2 {
 
 .movies-button {
   background-color: #0071eb;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   color: white;
 }
 
 .tvshows-button {
   background-color: #0071eb;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   color: white;
 }
 
@@ -332,6 +345,7 @@ h2 {
 .section-title {
   font-size: 2rem;
   margin: 20px 0;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   color: darkblue;
   font-weight: 700;
   text-align: center;
@@ -353,7 +367,12 @@ h2 {
 
 .more-details-btn {
   width: 100%;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   margin-top: 10px;
+}
+
+.movie-details-btn:hover {
+  background-color: #0056b3;
 }
 
 /* MovieDetails styles */
@@ -471,6 +490,7 @@ h2 {
 
 .cart-item-details h4 {
   margin-bottom: 5px;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
 }
 
 .remove-btn {
@@ -548,11 +568,13 @@ h2 {
   margin: 10px 0 5px 0;
   font-size: 1.1rem;
   font-weight: 600;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   color: #333;
 }
 
 .card-content .year {
   color: #666;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   font-size: 0.9rem;
   margin-bottom: 15px;
 }
@@ -560,6 +582,7 @@ h2 {
 /* View Details button styling */
 .details-btn {
   background-color: #0071eb;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -639,6 +662,7 @@ h2 {
   font-size: 2.8rem;
   font-weight: bold;
   background: linear-gradient(135deg, #5ca7e4, #2c5aa0);
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -646,7 +670,6 @@ h2 {
   margin: 0;
   padding: 5px 5px;
   position: relative;
-  font-family: 'Arial', sans-serif;
   letter-spacing: 2px;
   text-transform: uppercase;
   background-color: rgba(92, 167, 228, 0.1);

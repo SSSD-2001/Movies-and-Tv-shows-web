@@ -27,41 +27,47 @@
 .admin-actions {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 
 .navigation-buttons {
   display: flex;
-  gap: 12px;
+  gap: 15px;
+  align-items: center;
 }
 
+/* Clean button styling - unified for all navigation elements */
 .btn-nav {
-  background: linear-gradient(135deg, #28a745, #20c997);
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 25px;
+  padding: 12px 24px;
+  border-radius: 15px;  
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  border: none;
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+  justify-content: center;
+  text-align: center;
+  min-width: 160px;
+  height: 48px;
+  box-sizing: border-box;
+  color: white;
 }
 
 .btn-nav:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
   text-decoration: none;
   color: white;
 }
 
 .movies-btn {
   background: linear-gradient(#5ca7e4);
-  border-radius: 6px;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 600;
+  border-radius: 15px;
   padding: 12px 24px;
   font-size: 16px;
   box-shadow: 0 2px 8px #0783e94d;
@@ -73,7 +79,9 @@
 
 .tvshows-btn {
   background: linear-gradient(#5ca7e4);
-  border-radius: 6px;
+  font-family: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 600;
+  border-radius: 15px;
   padding: 12px 24px;
   font-size: 16px;
   box-shadow: 0 2px 8px #0783e94d;
@@ -84,18 +92,32 @@
 }
 
 .btn-primary {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #0056b3, #004085);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .admin-actions {
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+  }
+  
+  .navigation-buttons {
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .btn-nav, .btn-primary {
+    min-width: 120px;
+    flex: 1;
+  }
 }
 
 .btn-primary:disabled {
