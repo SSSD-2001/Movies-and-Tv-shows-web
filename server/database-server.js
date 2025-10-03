@@ -15,6 +15,38 @@ const isAdminEmail = (email) => {
   return ADMIN_EMAILS.includes(email.toLowerCase());
 };
 
+// Function to update existing users with admin roles
+const updateExistingAdminUsers = async () => {
+  try {
+    console.log('🔧 Checking for existing admin users to update...');
+    
+    // Find users with admin emails but missing admin role
+    const adminEmailUsers = await User.find({
+      email: { $in: ADMIN_EMAILS },
+      $or: [
+        { role: { $ne: 'admin' } },
+        { role: { $exists: false } }
+      ]
+    });
+    
+    if (adminEmailUsers.length > 0) {
+      console.log(`Found ${adminEmailUsers.length} users with admin emails needing role update:`);
+      
+      for (const user of adminEmailUsers) {
+        console.log(`- Updating ${user.username} (${user.email}) to admin role`);
+        user.role = 'admin';
+        await user.save();
+      }
+      
+      console.log('✅ Successfully updated existing admin users');
+    } else {
+      console.log('✅ All admin users already have correct roles');
+    }
+  } catch (error) {
+    console.error('❌ Error updating existing admin users:', error);
+  }
+};
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -27,9 +59,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/movies_app', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => {
+.then(async () => {
   console.log('MongoDB Connected to movies_app database');
   console.log('Database URL: mongodb://localhost:27017/movies_app');
+  
+  // Update existing admin users after connection
+  await updateExistingAdminUsers();
 })
 .catch(err => {
   console.error('MongoDB Connection Error:', err);
