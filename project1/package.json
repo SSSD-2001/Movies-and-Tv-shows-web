@@ -39,5 +39,6 @@
     "@babel/preset-react": "^7.27.1",
     "@babel/runtime": "^7.28.2",
     "babel-preset-react-app": "^10.1.0"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

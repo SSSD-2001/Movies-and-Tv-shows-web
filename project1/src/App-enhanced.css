@@ -16,11 +16,11 @@
 .App-header {
   background-color: #282c34;
   padding: 20px;
-  color: white;
+  color: black;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #5cd5f7;
 }
 
 @keyframes App-logo-spin {
