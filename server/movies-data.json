@@ -202,5 +202,17 @@
     "rating": "6.9",
     "downloadLink": "https://share.google/jJtOpzgRq3KhImlVr",
     "imageUrl": "https://m.media-amazon.com/images/M/MV5BNmVmZGQ2ZTctYzE4NC00YzkxLThhNjYtNGIyZjJmZGEwMjUzXkEyXkFqcGc@._V1_.jpg"
+  },
+  {
+    "_id": "20",
+    "title": "Friends",
+    "year": "1994 ",
+    "type": "tv",
+    "plot": "Follow the lives of six reckless adults living in Manhattan, as they indulge in adventures which make their lives both troublesome and happening.",
+    "directors": " Marta Kauffman, David Crane",
+    "genre": "Comedy, Romance",
+    "rating": "8.9",
+    "downloadLink": "https://share.google/nowaENBt2BjrDIEwW",
+    "imageUrl": "https://m.media-amazon.com/images/M/MV5BOTU2YmM5ZjctOGVlMC00YTczLTljM2MtYjhlNGI5YWMyZjFkXkEyXkFqcGc@._V1_.jpg"
   }
 ]

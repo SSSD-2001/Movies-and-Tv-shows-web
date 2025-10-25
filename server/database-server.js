@@ -6,7 +6,7 @@ require('dotenv').config();
 // Admin email configuration - only these emails can be admins
 const ADMIN_EMAILS = [
   'admin@popcorntales.com',
-  'admin@gmail.com',
+  'admin@gmail.com',            // ← add your admin email here
   'superadmin@popcorntales.com'
 ];
 
